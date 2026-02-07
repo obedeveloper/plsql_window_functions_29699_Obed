@@ -74,3 +74,110 @@ This table records individual rental transactions made by customers.
 - **Products** to **Rentals**: One-to-Many relationship (one product can be rented multiple times).
   
 <img width="3208" height="2404" alt="image" src="https://github.com/user-attachments/assets/07743808-9f4d-4192-9a12-ec74b8621ff8" />
+
+## SQL Joins Implementation
+
+I have created required tables and I have aslo insterted sample data, check out this [SQL script](https://github.com/obedeveloper/plsql_window_functions_29699_Obed/blob/a9c6725a7f9d344e076ab9663902745a3eddca4d/sql-scripts/01-create-tables-and-insert-sample-data.sql) for more info.
+
+### 1. INNER JOIN: Retrieve transactions with valid customers and products
+
+```sql
+-- Inner Join to retrieve transactions with valid customers and products
+SELECT 
+    Rentals.rental_id, 
+    Customers.name AS customer_name, 
+    Products.product_name, 
+    Rentals.rental_date, 
+    Rentals.return_date 
+FROM 
+    Rentals
+INNER JOIN 
+    Customers ON Rentals.customer_id = Customers.customer_id
+INNER JOIN 
+    Products ON Rentals.product_id = Products.product_id;
+```
+
+<img width="946" height="196" alt="image" src="https://github.com/user-attachments/assets/13708779-79c3-4418-b5b7-5f5032920bda" />
+
+**Business Interpretation:** This query reveals all transactions linked to actual customers and products. By identifying valid transactions, the business can analyze customers' preferences and product performance effectively.
+
+### 2. LEFT JOIN: Identify customers who have never made a transaction
+
+```sql
+-- Left Join to identify customers who have never made a transaction
+SELECT 
+    Customers.name AS customer_name, 
+    Customers.email, 
+    Rentals.rental_id 
+FROM 
+    Customers
+LEFT JOIN 
+    Rentals ON Customers.customer_id = Rentals.customer_id
+WHERE 
+    Rentals.rental_id IS NULL;
+```
+
+<img width="481" height="82" alt="image" src="https://github.com/user-attachments/assets/3e20728a-87c9-4512-9582-b911d1d62639" />
+
+**Business Interpretation:** This query identifies customers who have not yet initiated any transactions. Targeting these customers with tailored marketing can help convert them into active users.
+
+### 3. RIGHT JOIN: Detect products with no sales activity
+
+```sql
+-- Right Join to detect products with no sales activity
+SELECT 
+    Products.product_name, 
+    Rentals.rental_id 
+FROM 
+    Products
+RIGHT JOIN 
+    Rentals ON Products.product_id = Rentals.product_id
+WHERE 
+    Rentals.rental_id IS NULL;
+```
+
+<img width="357" height="80" alt="image" src="https://github.com/user-attachments/assets/17a79b34-4ecb-4370-adfd-1243ad40d305" />
+
+**Business Interpretation:** This query shows products that have not been rented out. Knowing which products have no sales activity allows the business to consider promotions or adjustments in inventory.
+
+### 4. FULL OUTER JOIN: Compare customers and products including unmatched records
+
+```sql
+-- Full Outer Join to compare customers and products including unmatched records
+SELECT 
+    Customers.name AS customer_name, 
+    Products.product_name, 
+    Rentals.rental_id 
+FROM 
+    Customers
+FULL OUTER JOIN 
+    Rentals ON Customers.customer_id = Rentals.customer_id
+FULL OUTER JOIN 
+    Products ON Rentals.product_id = Products.product_id;
+```
+
+<img width="608" height="225" alt="image" src="https://github.com/user-attachments/assets/d1a6f26d-ba48-4b62-a011-aa3e49649cf7" />
+
+**Business Interpretation:** This query provides a comprehensive view, showcasing both customers with transactions and those without, alongside products involved in these transactions. This is valuable for understanding overall engagement in the rental service.
+
+### 5. SELF JOIN: Compare customers within the same region or transactions within the same time period
+
+```sql
+-- Self Join to compare customers with the same rental dates
+SELECT 
+    C1.name AS customer_name_1, 
+    C2.name AS customer_name_2, 
+    A.rental_date 
+FROM 
+    Rentals A
+JOIN 
+    Rentals B ON A.rental_date = B.rental_date AND A.customer_id != B.customer_id
+JOIN 
+    Customers C1 ON A.customer_id = C1.customer_id
+JOIN 
+    Customers C2 ON B.customer_id = C2.customer_id;
+```
+
+<img width="673" height="105" alt="image" src="https://github.com/user-attachments/assets/eb1fa214-9889-49b6-a94d-35851c61993d" />
+
+**Business Interpretation:** This query compares customers who made rentals on the same date, allowing analysis of user behavior patterns. Identifying simultaneous renters can inform promotional strategies aimed at increasing rental frequency.
