@@ -1,3 +1,5 @@
+# SQL JOINs & Window Functions Project
+
 ## Problem Definition
 
 ### Business Context
@@ -10,8 +12,6 @@ The marketing department struggles to effectively target customers due to insuff
 
 ### Expected Outcome
 The objective is to analyze rental frequency, customer demographics, and garment preferences to identify key customer segments. This will enable the development of personalized marketing strategies aimed at increasing repeat rentals by 20% over the next six months.
-
----
 
 ## Success Criteria
 
@@ -32,8 +32,6 @@ The objective is to analyze rental frequency, customer demographics, and garment
 5. **Three-Month Moving Averages**  
    Apply **AVG() OVER()** for calculating three-month moving averages of rental transactions. The goal is to smooth out fluctuations in monthly rental data, providing a clearer picture of long-term trends and seasonality.
 
----
-
 ## Database Schema Design
 
 ### 1. **Customers Table**
@@ -47,8 +45,6 @@ This table stores information about the customers who rent clothing.
 | **phone**            | VARCHAR(15)      | NULL                                 |
 | **registration_date** | DATE             | NOT NULL                             |
 
----
-
 ### 2. **Products Table**
 This table contains details about the clothing items available for rent.
 
@@ -59,8 +55,6 @@ This table contains details about the clothing items available for rent.
 | **category**       | VARCHAR(100)     | NOT NULL                             |
 | **rental_price**   | DECIMAL(10, 2)   | NOT NULL                             |
 | **stock_quantity** | INT              | NOT NULL                             |
-
----
 
 ### 3. **Rentals Table**
 This table records individual rental transactions made by customers.
@@ -73,8 +67,6 @@ This table records individual rental transactions made by customers.
 | **rental_date**     | DATE             | NOT NULL                             |
 | **return_date**     | DATE             | NULL                                 |
 | **rental_status**   | VARCHAR(50)      | NOT NULL                             |
-
----
 
 ### Relationships
 
