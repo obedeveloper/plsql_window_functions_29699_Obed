@@ -72,3 +72,5 @@ This table records individual rental transactions made by customers.
 
 - **Customers** to **Rentals**: One-to-Many relationship (one customer can have multiple rentals).
 - **Products** to **Rentals**: One-to-Many relationship (one product can be rented multiple times).
+  
+<img width="3208" height="2404" alt="image" src="https://github.com/user-attachments/assets/07743808-9f4d-4192-9a12-ec74b8621ff8" />
