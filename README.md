@@ -97,7 +97,7 @@ INNER JOIN
     Products ON Rentals.product_id = Products.product_id;
 ```
 
-<img width="946" height="196" alt="image" src="https://github.com/user-attachments/assets/13708779-79c3-4418-b5b7-5f5032920bda" />
+<img width="1005" height="509" alt="image" src="https://github.com/user-attachments/assets/0076934f-d5f5-41fb-8bef-279799b53fee" />
 
 **Business Interpretation:** This query reveals all transactions linked to actual customers and products. By identifying valid transactions, the business can analyze customers' preferences and product performance effectively.
 
@@ -117,7 +117,7 @@ WHERE
     Rentals.rental_id IS NULL;
 ```
 
-<img width="481" height="82" alt="image" src="https://github.com/user-attachments/assets/3e20728a-87c9-4512-9582-b911d1d62639" />
+<img width="984" height="365" alt="image" src="https://github.com/user-attachments/assets/82287e34-473b-4b47-9313-961ee9391876" />
 
 **Business Interpretation:** This query identifies customers who have not yet initiated any transactions. Targeting these customers with tailored marketing can help convert them into active users.
 
@@ -136,7 +136,7 @@ WHERE
     Rentals.rental_id IS NULL;
 ```
 
-<img width="357" height="80" alt="image" src="https://github.com/user-attachments/assets/17a79b34-4ecb-4370-adfd-1243ad40d305" />
+<img width="946" height="321" alt="image" src="https://github.com/user-attachments/assets/581b72dc-fc75-4359-bf30-29c23ae00057" />
 
 **Business Interpretation:** This query shows products that have not been rented out. Knowing which products have no sales activity allows the business to consider promotions or adjustments in inventory.
 
@@ -156,7 +156,7 @@ FULL OUTER JOIN
     Products ON Rentals.product_id = Products.product_id;
 ```
 
-<img width="608" height="225" alt="image" src="https://github.com/user-attachments/assets/d1a6f26d-ba48-4b62-a011-aa3e49649cf7" />
+<img width="992" height="483" alt="image" src="https://github.com/user-attachments/assets/6cb3d940-ee35-40a9-8349-e0e798bf057d" />
 
 **Business Interpretation:** This query provides a comprehensive view, showcasing both customers with transactions and those without, alongside products involved in these transactions. This is valuable for understanding overall engagement in the rental service.
 
@@ -178,7 +178,7 @@ JOIN
     Customers C2 ON B.customer_id = C2.customer_id;
 ```
 
-<img width="673" height="105" alt="image" src="https://github.com/user-attachments/assets/eb1fa214-9889-49b6-a94d-35851c61993d" />
+<img width="1282" height="403" alt="image" src="https://github.com/user-attachments/assets/aa2195b2-04f3-4094-91c0-bdb2362d9b42" />
 
 **Business Interpretation:** This query compares customers who made rentals on the same date, allowing analysis of user behavior patterns. Identifying simultaneous renters can inform promotional strategies aimed at increasing rental frequency.
 
@@ -205,7 +205,7 @@ ORDER BY
     revenue_rank;
 ```
 
-<img width="776" height="145" alt="image" src="https://github.com/user-attachments/assets/eb2ddb17-f13b-4533-9d94-74cfa5fb2080" />
+<img width="1109" height="554" alt="image" src="https://github.com/user-attachments/assets/16db7641-6722-4d5a-9ef6-4ec07c28f233" />
 
 **Business Interpretation:** This query ranks customers based on their total revenue from rentals. Understanding which customers contribute the most can help in formulating loyalty programs and targeted marketing strategies.
 
@@ -228,7 +228,7 @@ ORDER BY
     rental_month;
 ```
 
-<img width="772" height="151" alt="image" src="https://github.com/user-attachments/assets/39e0bf7c-f05c-4de1-b6da-3d85d5271816" />
+<img width="1447" height="504" alt="image" src="https://github.com/user-attachments/assets/e653fe64-2add-48b0-a596-1a255cf0e10c" />
 
 **Business Interpretation:** This query calculates the monthly revenue and provides a running total over these months, allowing the business to track financial performance trends over time and adjust strategies accordingly.
 
@@ -256,7 +256,7 @@ FROM
     monthly_revenue;
 ```
 
-<img width="1024" height="137" alt="image" src="https://github.com/user-attachments/assets/695c2414-3bbf-438f-ad5e-05dd91918cc7" />
+<img width="1297" height="606" alt="image" src="https://github.com/user-attachments/assets/0575a028-51b6-40b2-b9e9-5553fb9149d0" />
 
 **Business Interpretation:** This query calculates the revenue growth by comparing each month's revenue to the previous month. Understanding these trends will help the business identify periods of growth or decline and make data-driven decisions.
 
@@ -281,6 +281,6 @@ ORDER BY
     spending_quartile;
 ```
 
-<img width="884" height="166" alt="image" src="https://github.com/user-attachments/assets/2034ad5b-b1a9-4043-9da4-59261c0284bf" />
+<img width="1126" height="548" alt="image" src="https://github.com/user-attachments/assets/1a66dacc-4340-414f-a73c-6b0a52ae38cc" />
 
 **Business Interpretation:** This query segments customers into quartiles based on their total spending. This segmentation allows the business to target marketing efforts to different customer groups based on their spending behavior.
