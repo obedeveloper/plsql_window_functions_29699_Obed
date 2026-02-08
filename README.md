@@ -284,3 +284,36 @@ ORDER BY
 <img width="1126" height="548" alt="image" src="https://github.com/user-attachments/assets/1a66dacc-4340-414f-a73c-6b0a52ae38cc" />
 
 **Business Interpretation:** This query segments customers into quartiles based on their total spending. This segmentation allows the business to target marketing efforts to different customer groups based on their spending behavior.
+
+## Insights
+
+1. **Customer-Product Relationships from FULL OUTER JOIN:**
+   - The query results show that **Alice Johnson** rented multiple items, including a Winter Jacket and an Evening Gown, while **Bob Smith** rented Jeans and **Charlie Brown** rented a Summer Dress and a Tuxedo.
+   - The FULL OUTER JOIN indicates that there are customers and products without direct associations, highlighting areas for potential marketing efforts aimed at products with no rental history or customers who haven't rented any items.
+
+2. **Revenue Ranking from Ranking Functions:**
+   - The revenue ranking shows that **Alice Johnson** has generated **$119.98** through rentals, followed closely by **Charlie Brown** at **$19.99** and **Bob Smith** at **$19.99**.
+   - This ranking allows the business to identify high-value customers, which can lead to personalized marketing strategies, such as loyalty rewards or targeted promotions to increase spending.
+
+3. **Monthly Revenue Trends:**
+   - The monthly revenue data shows a total of **$139.97** for the month of **February 2022**, with a comparison to the previous month.
+   - A significant revenue increase from the prior month provides insight into customer engagement and rental activity, suggesting successful marketing campaigns or seasonal demand dynamics, which can be critical for future business planning.
+
+## References
+
+1. **PostgreSQL Official Documentation**
+   - URL: [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+
+2. **W3Schools SQL Tutorial**
+   - URL: [W3Schools SQL Tutorial](https://www.w3schools.com/sql/)
+
+3. **PostgreSQL Tutorial**
+   - URL: [PostgreSQL Tutorial](https://www.postgresqltutorial.com/)
+
+4. **LeetCode SQL Challenges**
+   - URL: [LeetCode SQL Problems](https://leetcode.com/problemset/all/?filters=tag%3ASQL)
+  
+## Integrity
+
+All sources were properly cited. Implementations and analysis represent original work. No AI-
+generated content was copied without attribution or adaptation.
