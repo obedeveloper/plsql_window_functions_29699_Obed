@@ -181,3 +181,106 @@ JOIN
 <img width="673" height="105" alt="image" src="https://github.com/user-attachments/assets/eb1fa214-9889-49b6-a94d-35851c61993d" />
 
 **Business Interpretation:** This query compares customers who made rentals on the same date, allowing analysis of user behavior patterns. Identifying simultaneous renters can inform promotional strategies aimed at increasing rental frequency.
+
+## Window Functions Implementation
+
+### 1. Ranking Functions
+
+```sql
+-- Ranking customers by total rental amount
+SELECT 
+    C.customer_id, 
+    C.name, 
+    SUM(P.rental_price) AS total_revenue,
+    RANK() OVER (ORDER BY SUM(P.rental_price) DESC) AS revenue_rank
+FROM 
+    Rentals R
+JOIN 
+    Customers C ON R.customer_id = C.customer_id
+JOIN 
+    Products P ON R.product_id = P.product_id
+GROUP BY 
+    C.customer_id
+ORDER BY 
+    revenue_rank;
+```
+
+<img width="776" height="145" alt="image" src="https://github.com/user-attachments/assets/eb2ddb17-f13b-4533-9d94-74cfa5fb2080" />
+
+**Business Interpretation:** This query ranks customers based on their total revenue from rentals. Understanding which customers contribute the most can help in formulating loyalty programs and targeted marketing strategies.
+
+### 2. Aggregate Window Functions
+
+```sql
+-- Running total of rental revenue per month
+SELECT 
+    DATE_TRUNC('month', R.rental_date) AS rental_month,
+    SUM(P.rental_price) AS monthly_revenue,
+    SUM(SUM(P.rental_price)) OVER (ORDER BY DATE_TRUNC('month', R.rental_date)
+                                   ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total
+FROM 
+    Rentals R
+JOIN 
+    Products P ON R.product_id = P.product_id
+GROUP BY 
+    rental_month
+ORDER BY 
+    rental_month;
+```
+
+<img width="772" height="151" alt="image" src="https://github.com/user-attachments/assets/39e0bf7c-f05c-4de1-b6da-3d85d5271816" />
+
+**Business Interpretation:** This query calculates the monthly revenue and provides a running total over these months, allowing the business to track financial performance trends over time and adjust strategies accordingly.
+
+### 3. Navigation Functions
+
+```sql
+-- Period-to-period comparison of monthly revenue growth
+WITH monthly_revenue AS (
+    SELECT 
+        DATE_TRUNC('month', R.rental_date) AS rental_month,
+        SUM(P.rental_price) AS monthly_revenue
+    FROM 
+        Rentals R
+    JOIN 
+        Products P ON R.product_id = P.product_id
+    GROUP BY 
+        rental_month
+)
+SELECT 
+    rental_month,
+    monthly_revenue,
+    LAG(monthly_revenue) OVER (ORDER BY rental_month) AS previous_month_revenue,
+    monthly_revenue - LAG(monthly_revenue) OVER (ORDER BY rental_month) AS growth
+FROM 
+    monthly_revenue;
+```
+
+<img width="1024" height="137" alt="image" src="https://github.com/user-attachments/assets/695c2414-3bbf-438f-ad5e-05dd91918cc7" />
+
+**Business Interpretation:** This query calculates the revenue growth by comparing each month's revenue to the previous month. Understanding these trends will help the business identify periods of growth or decline and make data-driven decisions.
+
+### 4. Distribution Functions
+
+```sql
+-- Customer segmentation into quartiles based on total spending
+SELECT 
+    C.customer_id, 
+    C.name, 
+    SUM(P.rental_price) AS total_spending,
+    NTILE(4) OVER (ORDER BY SUM(P.rental_price)) AS spending_quartile
+FROM 
+    Rentals R
+JOIN 
+    Customers C ON R.customer_id = C.customer_id
+JOIN 
+    Products P ON R.product_id = P.product_id
+GROUP BY 
+    C.customer_id
+ORDER BY 
+    spending_quartile;
+```
+
+<img width="884" height="166" alt="image" src="https://github.com/user-attachments/assets/2034ad5b-b1a9-4043-9da4-59261c0284bf" />
+
+**Business Interpretation:** This query segments customers into quartiles based on their total spending. This segmentation allows the business to target marketing efforts to different customer groups based on their spending behavior.
